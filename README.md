@@ -5,6 +5,8 @@ React Excel Workbook is a library for defining downloadable excel workbooks with
 ## Example
 
 ```jsx
+import Workbook from 'react-excel-workbook
+
 const data1 = [
   {
     foo: '123',
