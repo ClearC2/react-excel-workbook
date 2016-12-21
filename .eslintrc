@@ -1,0 +1,64 @@
+{
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "jquery" : true
+    }
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "rules":{
+    "no-console":1,
+    "semi": ["error", "never"],
+    "curly": ["error", "multi-line"],
+    "no-extra-bind": "error",
+    "no-floating-decimal": "error",
+    "no-multi-spaces": "error",
+    "yoda": ["error", "never", {"exceptRange":true}],
+    "array-bracket-spacing": ["error", "never"],
+    "block-spacing": ["error", "never"],
+    "brace-style": ["error", "1tbs", {"allowSingleLine": true}],
+    "comma-spacing": ["error", {"before": false, "after": true}],
+    "computed-property-spacing": ["error", "never"],
+    "func-call-spacing": ["error", "never"],
+    "indent": ["error", 2],
+    "jsx-quotes": ["error", "prefer-double"],
+    "keyword-spacing": "error",
+    "no-trailing-spaces": "error",
+    "object-curly-newline": ["error", { "multiline": true }],
+    "object-curly-spacing": ["error", "never"],
+    "space-before-blocks": "error",
+    "space-before-function-paren": "error",
+    "space-in-parens": ["error", "never"],
+    "spaced-comment": "error",
+    "arrow-spacing": "error"
+  },
+  "globals": {
+    "$": false,
+    "global": true,
+    "APP_ENV": false,
+    "NODE_ENV": false,
+    "document": false,
+    "console": false,
+    "localStorage": false,
+    "window": false,
+    "require": false,
+    "Promise": false,
+    "setInterval": false,
+    "clearInterval": false,
+    "setTimeout": false,
+    "clearTimeout": false,
+    "Blob": false,
+    "ArrayBuffer": false,
+    "Uint8Array": false,
+    "describe": false,
+    "before": false,
+    "beforeEach": false,
+    "it": false,
+    "exports": false,
+    "module": false
+  }
+}
