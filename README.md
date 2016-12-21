@@ -57,13 +57,13 @@ render(example, document.getElementById('app'))
 ![Example](http://i.imgur.com/dfhivAs.png)
 ![Excel](http://i.imgur.com/OnInSNv.png)
 
-Workbooks can have multiple sheets. Sheets have can use the same or different data sets(an array of objects).
-Sheets have columns. Columns define a column label and value. Values can either be string(the property name) or a function
+Workbooks can have multiple sheets. Sheets can use the same or different data sets(an array of objects).
+Sheets have columns. Columns define a column label and value. Values can either be a string(the property name) or a function
 that takes the current object and returns a value.
 
-## dependencies
+## Dependencies
 
-This package uses [file-saver](https://www.npmjs.com/package/file-saver) and [xlsx](https://www.npmjs.com/package/xlsx) packages. I am only familiar with webpack and in order for everything to work with webpack you must use the json-loader and have this defined in your webpack config.
+This package uses [file-saver](https://www.npmjs.com/package/file-saver) and [xlsx](https://www.npmjs.com/package/xlsx) packages. I am only familiar with webpack and in order for everything to work with webpack you must use the [json-loader](https://www.npmjs.com/package/json-loader) and have this defined in your webpack config.
 
 ```js
 node: {fs: 'empty'},
@@ -71,3 +71,9 @@ externals: [
   {'./cptable': 'var cptable'}
 ]
 ```
+
+See the `example` directory for a working example.
+
+## Testing
+
+I have no idea how to test this.
