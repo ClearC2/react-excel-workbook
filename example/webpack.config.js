@@ -35,7 +35,8 @@ module.exports = function () {
     ],
     node: {fs: 'empty'},
     externals: [
-      {'./cptable': 'var cptable'}
+      {'./cptable': 'var cptable'},
+      {'./jszip': 'jszip'}
     ]
   }
 }

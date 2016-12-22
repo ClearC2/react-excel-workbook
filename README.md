@@ -5,6 +5,8 @@ React Excel Workbook is a library for defining downloadable excel workbooks with
 ## Example
 
 ```jsx
+import Workbook from 'react-excel-workbook'
+
 const data1 = [
   {
     foo: '123',
@@ -68,7 +70,8 @@ This package uses [file-saver](https://www.npmjs.com/package/file-saver) and [xl
 ```js
 node: {fs: 'empty'},
 externals: [
-  {'./cptable': 'var cptable'}
+  {'./cptable': 'var cptable'},
+  {'./jszip': 'jszip'}
 ]
 ```
 
