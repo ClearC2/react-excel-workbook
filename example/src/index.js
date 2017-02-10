@@ -37,7 +37,7 @@ const example = (
   <div className="row" style={{marginTop: '100px'}}>
     <div className="col-xs-12 text-center">
       <Workbook filename="example.xlsx" element={<button className="btn btn-lg btn-primary">Try me!</button>}>
-        <Workbook.Sheet data={data1} name="Sheet A">
+        <Workbook.Sheet data={() => data1} name="Sheet A">
           <Workbook.Column label="Foo" value="foo"/>
           <Workbook.Column label="Bar" value="bar"/>
         </Workbook.Sheet>

@@ -59,7 +59,10 @@ export class Column extends Component { // eslint-disable-line react/require-ren
 export class Sheet extends Component { // eslint-disable-line react/require-render-return
   static propTypes = {
     name: PropTypes.string.isRequired,
-    data: PropTypes.array.isRequired,
+    data: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.func
+    ]).isRequired,
     children: PropTypes.arrayOf((propValue, key) => {
       const type = propValue[key].type
       if (type !== Column) {
@@ -94,8 +97,9 @@ export class Workbook extends Component {
   createSheetData (sheet) {
     const columns = sheet.props.children
     const sheetData = [React.Children.map(columns, column => column.props.label)]
+    const data = typeof(sheet.props.data) === 'function' ? sheet.props.data() : sheet.props.data
 
-    sheet.props.data.forEach(row => {
+    data.forEach(row => {
       const sheetRow = []
       React.Children.forEach(columns, column => {
         const getValue = typeof(column.props.value) === 'function' ? column.props.value : row => row[column.props.value]
