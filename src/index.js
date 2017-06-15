@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {saveAs} from 'file-saver'
 import XLSX from 'xlsx'
 
@@ -80,12 +81,13 @@ export class Workbook extends Component {
   static propTypes = {
     filename: PropTypes.string,
     element: PropTypes.any,
-    children: PropTypes.arrayOf((propValue, key) => {
-      const type = propValue[key].type
-      if (type !== Sheet) {
-        throw new Error('<Workbook> can only have <Sheet>\'s as children. ')
-      }
-    })
+    children: function (props, propName, componentName) {
+      React.Children.forEach(props[propName], child => {
+        if (child.type !== Sheet) {
+          throw new Error('<Workbook> can only have <Sheet>\'s as children. ')
+        }
+      })
+    }
   }
 
   constructor (props) {

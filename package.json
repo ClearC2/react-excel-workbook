@@ -1,6 +1,6 @@
 {
   "name": "react-excel-workbook",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An downloadable excel workbook react component",
   "main": "lib/index.js",
   "scripts": {
@@ -42,7 +42,8 @@
   },
   "peerDependencies": {
     "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "react-dom": "^15.0.0",
+    "prop-types": "^15.0.0"
   },
   "homepage": "https://github.com/ClearC2/react-excel-workbook"
 }
