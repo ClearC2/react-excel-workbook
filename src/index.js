@@ -25,21 +25,26 @@ function sheet_from_array_of_arrays (data) {
       if (range.s.c > C) range.s.c = C
       if (range.e.r < R) range.e.r = R
       if (range.e.c < C) range.e.c = C
-      var cell = {v: data[R][C]}
-      if (cell.v == null) continue
-      var cell_ref = XLSX.utils.encode_cell({c:C, r:R})
+      var cell = { v: data[R][C].value, z: data[R][C].format }
+      if (cell.v !== null) {
+        var cell_ref = XLSX.utils.encode_cell({ c: C, r: R })
 
-      if (typeof cell.v === 'number') cell.t = 'n'
-      else if (typeof cell.v === 'boolean') cell.t = 'b'
-      else if (cell.v instanceof Date) {
-        cell.t = 'n'; cell.z = XLSX.SSF._table[14]
-        cell.v = datenum(cell.v)
-      } else cell.t = 's'
+        if (typeof cell.v === 'number') cell.t = 'n'
+        else if (typeof cell.v === 'boolean') cell.t = 'b'
+        else if (cell.v instanceof Date) {
+          cell.t = 'n'
+          cell.v = datenum(cell.v)
+          cell.z = cell.z || XLSX.SSF._table[14]
+        } else cell.t = 's'
 
-      ws[cell_ref] = cell
+        ws[cell_ref] = cell
+      }
     }
   }
   if (range.s.c < 10000000) ws['!ref'] = XLSX.utils.encode_range(range)
+  ws['!cols'] = data[0].map((header) => {
+    return { width: header.width }
+  })
   return ws
 }
 
@@ -49,7 +54,9 @@ export class Column extends Component { // eslint-disable-line react/require-ren
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.func
-    ]).isRequired
+    ]).isRequired,
+    format: PropTypes.string,
+    width: PropTypes.number
   }
 
   render () {
@@ -98,14 +105,18 @@ export class Workbook extends Component {
 
   createSheetData (sheet) {
     const columns = sheet.props.children
-    const sheetData = [React.Children.map(columns, column => column.props.label)]
-    const data = typeof(sheet.props.data) === 'function' ? sheet.props.data() : sheet.props.data
+    const sheetData = [React.Children.map(columns, column => {
+      return { value: column.props.label, width: column.props.width }
+    })]
+    const data = typeof (sheet.props.data) === 'function' ? sheet.props.data() : sheet.props.data
 
     data.forEach(row => {
       const sheetRow = []
       React.Children.forEach(columns, column => {
-        const getValue = typeof(column.props.value) === 'function' ? column.props.value : row => row[column.props.value]
-        sheetRow.push(getValue(row) || '')
+        const getValue = typeof (column.props.value) === 'function' ? column.props.value : row => row[column.props.value]
+        const value = getValue(row) || ''
+        const format = column.props.format || ''
+        sheetRow.push({ value, format })
       })
       sheetData.push(sheetRow)
     })
