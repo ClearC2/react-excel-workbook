@@ -11,17 +11,17 @@ const data1 = [
   {
     foo: '123',
     bar: '456',
-    baz: '789'
+    baz: 1234
   },
   {
     foo: 'abc',
     bar: 'dfg',
-    baz: 'hij'
+    baz: 567
   },
   {
     foo: 'aaa',
     bar: 'bbb',
-    baz: 'ccc'
+    baz: 89
   }
 ]
 
@@ -44,6 +44,7 @@ const example = (
       <Workbook.Sheet data={data1} name="Sheet A">
         <Workbook.Column label="Foo" value="foo"/>
         <Workbook.Column label="Bar" value="bar"/>
+        <Workbook.Column label="Baz" value="baz" width={20} format="£#0.00"/>
       </Workbook.Sheet>
       <Workbook.Sheet data={data2} name="Another sheet">
         <Workbook.Column label="Double aaa" value={row => row.aaa * 2}/>
