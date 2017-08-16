@@ -113,7 +113,8 @@ export class Workbook extends Component {
     return sheetData
   }
 
-  download () {
+  download (e) {
+    e.preventDefault();
     const wb = {
       SheetNames: React.Children.map(this.props.children, sheet => sheet.props.name),
       Sheets: {}
