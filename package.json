@@ -1,18 +1,18 @@
 {
   "name": "react-excel-workbook",
-  "version": "0.0.4",
-  "description": "An downloadable excel workbook react component",
+  "version": "0.0.1",
+  "description": "An downloadable excel workbook react component from ClearC2 and republish by devarchi33",
   "main": "lib/index.js",
   "scripts": {
     "start": "cd example && webpack-dev-server --inline --content-base dist --history-api-fallback --port 8082",
     "compile": "babel -d lib/ src/",
-    "prepublish": "npm run compile"
+    "prepublish": "yarn run compile"
   },
-  "author": "David Adams",
+  "author": "devarchi33",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ClearC2/react-excel-workbook"
+    "url": "https://github.com/devarchi33/react-excel-workbook"
   },
   "keywords": [
     "react-component",
