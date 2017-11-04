@@ -81,6 +81,7 @@ export class Workbook extends Component {
   static propTypes = {
     filename: PropTypes.string,
     element: PropTypes.any,
+    beforeDownload: PropTypes.func,
     children: function (props, propName, componentName) {
       React.Children.forEach(props[propName], child => {
         if (child.type !== Sheet) {
@@ -114,6 +115,10 @@ export class Workbook extends Component {
   }
 
   download () {
+    if (this.props.beforeDownload !== undefined || this.props.beforeDownload !== null) {
+      this.props.beforeDownload()
+    }
+
     const wb = {
       SheetNames: React.Children.map(this.props.children, sheet => sheet.props.name),
       Sheets: {}
