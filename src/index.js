@@ -17,6 +17,7 @@ function datenum (v, date1904) {
 }
 
 function sheet_from_array_of_arrays (data,headColorBackground,headColorFont,columnsWidths) {
+  console.log(headColorBackground);
   var ws = {}
   var range = {s: {c:10000000, r:10000000}, e: {c:0, r:0}}
   for (var R = 0; R != data.length; ++R) {
@@ -36,7 +37,7 @@ function sheet_from_array_of_arrays (data,headColorBackground,headColorFont,colu
         cell.v = datenum(cell.v)
       } else cell.t = 's'
 
-			if(R == 0){
+			if(R == 0 && (headColorBackground!==undefined || headColorFont!==undefined)){
 				cell.s={
 					fill:{
             fgColor:{ rgb: headColorBackground }
@@ -134,8 +135,7 @@ export class Workbook extends Component {
     }
 
     React.Children.forEach(this.props.children, sheet => {
-      const columns = sheet.props.children
-      const columnsWidths = React.Children.map(columns, column =>{ return {'wch':column.props.width} }  )
+      const columnsWidths = React.Children.map(sheet.props.children, column =>{ return {'wch':column.props.width?column.props.width:'20'} }  )
       wb.Sheets[sheet.props.name] = sheet_from_array_of_arrays(this.createSheetData(sheet),sheet.props.headColorBackground,sheet.props.headColorFont,columnsWidths     )
     })
 
