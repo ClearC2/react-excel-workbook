@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {saveAs} from 'file-saver'
-import XLSX from 'xlsx'
+import XLSX from 'xlsx-style'
 
 function s2ab (s) {
   var buf = new ArrayBuffer(s.length)
@@ -16,7 +16,7 @@ function datenum (v, date1904) {
   return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000)
 }
 
-function sheet_from_array_of_arrays (data) {
+function sheet_from_array_of_arrays (data,headColorBackground,headColorFont,columnsWidths) {
   var ws = {}
   var range = {s: {c:10000000, r:10000000}, e: {c:0, r:0}}
   for (var R = 0; R != data.length; ++R) {
@@ -36,6 +36,17 @@ function sheet_from_array_of_arrays (data) {
         cell.v = datenum(cell.v)
       } else cell.t = 's'
 
+			if(R == 0){
+				cell.s={
+					fill:{
+            fgColor:{ rgb: headColorBackground }
+          },
+          font:{
+            color:{ rgb: headColorFont }
+          }
+				}
+      }
+      ws['!cols'] = columnsWidths
       ws[cell_ref] = cell
     }
   }
@@ -49,7 +60,8 @@ export class Column extends Component { // eslint-disable-line react/require-ren
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.func
-    ]).isRequired
+    ]).isRequired,
+    width: PropTypes.string,
   }
 
   render () {
@@ -69,7 +81,9 @@ export class Sheet extends Component { // eslint-disable-line react/require-rend
       if (type !== Column) {
         throw new Error('<Sheet> can only have <Column>\'s as children. ')
       }
-    }).isRequired
+    }).isRequired,
+    headColorBackground: PropTypes.string,
+    headColorFont: PropTypes.string,
   }
 
   render () {
@@ -120,7 +134,9 @@ export class Workbook extends Component {
     }
 
     React.Children.forEach(this.props.children, sheet => {
-      wb.Sheets[sheet.props.name] = sheet_from_array_of_arrays(this.createSheetData(sheet))
+      const columns = sheet.props.children
+      const columnsWidths = React.Children.map(columns, column =>{ return {'wch':column.props.width} }  )
+      wb.Sheets[sheet.props.name] = sheet_from_array_of_arrays(this.createSheetData(sheet),sheet.props.headColorBackground,sheet.props.headColorFont,columnsWidths     )
     })
 
     const wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'})
