@@ -37,9 +37,9 @@ const example = (
   <div className="row" style={{marginTop: '100px'}}>
     <div className="col-xs-12 text-center">
       <Workbook filename="example.xlsx" element={<button className="btn btn-lg btn-primary">Try me!</button>}>
-        <Workbook.Sheet data={() => data1} name="Sheet A">
-          <Workbook.Column label="Foo" value="foo"/>
-          <Workbook.Column label="Bar" value="bar"/>
+        <Workbook.Sheet data={() => data1} name="Sheet A" headColorBackground="7d7d7d" headColorFont="FFFFFF" >
+          <Workbook.Column label="Foo" value="foo" width="20" />
+          <Workbook.Column label="Bar" value="bar" width="120" />
         </Workbook.Sheet>
         <Workbook.Sheet data={data2} name="Another sheet">
           <Workbook.Column label="Double aaa" value={row => row.aaa * 2}/>

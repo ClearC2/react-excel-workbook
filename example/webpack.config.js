@@ -10,7 +10,7 @@ module.exports = function () {
       vendor: [
         'react',
         'react-dom',
-        'xlsx',
+        'xlsx-style',
         'file-saver'
       ]
     },
