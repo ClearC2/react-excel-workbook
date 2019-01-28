@@ -10,7 +10,7 @@ const data1 = [
   },
   {
     foo: 'abc',
-    bar: 'dfg',
+    bar: 'BCAC24VO11NAONA',
     baz: 'hij'
   },
   {

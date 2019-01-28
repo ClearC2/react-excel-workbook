@@ -1,6 +1,6 @@
 {
   "name": "react-xlsx-workbook",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "An downloadable excel workbook react component from ClearC2 and republish by devarchi33",
   "main": "lib/index.js",
   "scripts": {

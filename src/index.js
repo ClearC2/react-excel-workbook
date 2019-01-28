@@ -37,8 +37,21 @@ function sheet_from_array_of_arrays (data) {
       } else cell.t = 's'
 
       ws[cell_ref] = cell
+
+      const dataCopyList = JSON.parse(JSON.stringify(data));
+      dataCopyList.shift();
+
+      ws['!cols'] = dataCopyList.map(dataCopy => {
+        return {
+          wpx: dataCopy
+              .map(value => String(value))
+              .reduce((a, b) => a.length > b.length ? a : b)
+              .length * 6.5 + 20
+        }
+      });
     }
   }
+
   if (range.s.c < 10000000) ws['!ref'] = XLSX.utils.encode_range(range)
   return ws
 }
@@ -115,7 +128,7 @@ export class Workbook extends Component {
   }
 
   download () {
-    if (this.props.beforeDownload !== undefined || this.props.beforeDownload !== null) {
+    if (this.props.beforeDownload !== undefined && this.props.beforeDownload !== null) {
       this.props.beforeDownload()
     }
 
@@ -134,7 +147,7 @@ export class Workbook extends Component {
 
   render () {
     return (
-      <span onClick={this.download}>
+        <span onClick={this.download}>
         {this.props.element ? this.props.element : "Download"}
       </span>
     )
