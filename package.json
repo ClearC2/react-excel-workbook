@@ -1,6 +1,6 @@
 {
   "name": "react-excel-workbook",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An downloadable excel workbook react component",
   "main": "lib/index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "file-saver": "^1.3.3",
+    "prop-types": "^15.8.1",
     "xlsx": "^0.10.3"
   },
   "devDependencies": {
@@ -35,15 +36,15 @@
     "eslint-plugin-react": "^6.8.0",
     "html-webpack-plugin": "^2.24.1",
     "json-loader": "^0.5.4",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "webpack": "github:webpack/webpack#v2.1.0-beta.27",
     "webpack-dev-server": "github:webpack/webpack-dev-server#v2.1.0-beta.12"
   },
   "peerDependencies": {
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "prop-types": "^15.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "prop-types": "^15.8.1"
   },
   "homepage": "https://github.com/ClearC2/react-excel-workbook"
 }
